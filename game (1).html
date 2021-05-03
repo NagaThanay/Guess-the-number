@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+    <title>guess the number</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<head>
+<style>
+#panel{display:none}
+#flip{cursor:pointer}
+#head{font-family: 'Permanent Marker', cursive; font-size:4em;color:black}
+</style>
+<body>
+    <div class='container-fluid p-3' >
+        <h1 class='text-center' id='head'>Guess the number</h1>
+  </div>
+    <div class='container-fluid p-5' style="background-color:rgb(211,191,214)">
+        <div class='row'>
+            <div class='col-lg-6'>
+                <h4>Name    &nbsp &nbsp:  <input type='text' class='tx' required style='height:30px'></h4><br/><br/>
+                <div class='hd' style="color:red" ><b>Enter a number from 1 to 10</b></div><br/>
+                <h4>Number  :  <input type='text'  class='i' required></h4><br/><br/><br/>
+                <div class='row'>
+                    <div class='col-lg-2'>
+                    <button onclick='count()' class='btn btn-info'>Submit</button><br/><br/></div>
+                    <div class=col-lg-2>
+                    <button onclick='end()' class='btn btn-danger'>End</button><br/><br/></div>
+                </div>
+                <div class='container p-2'>
+                    <div class='op'></div><br/><br/>
+                </div>
+            </div>
+            <div class='col-lg-6'>
+                <img src='gameimg1.jpg' style='height:345px'>
+            </div>
+            </div>
+            <div class='row'>
+              <div class='col-lg-12'>
+                <p>Your win's status   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<progress min="0" max="100" value="0" class='pro'></progress></p> <br/>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-lg-5'>
+                <p>Computer win's status    &nbsp &nbsp<progress min="0" max="100" value="0" class='pro1'></progress></p>
+              </div>
+              <div class='col-lg-7'>
+                  <div style='border: 2px dotted blue'>
+                      <p class='p-3'>
+                      <u style='color:red'>NOTE:</u><p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp You will get a reward of 3 DogeCoin(crypto currency) <br/>
+                      &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp T&C: This is applicable only when the number of games is greater than or qual to 5</p><p>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div class='rules  container-fluid p-3' style='font-size:1.2em' id='flip'>
+        <div  class='col-lg-7'>
+            <b style='font-size:1.2em'>How to play &nbsp<sub style="color:red">click</sub></b>
+            <div style="background-color:#00f8ff">
+            <p id='panel'><br/>
+                1. You have to enter a number from 1 to 10.<br/>
+                2. If the number you entered is same as the number assumed by the computer then you will win the game else computer wins.<br/>
+                3. If you click on 'End' button then the game will end.
+                 </p>
+              </div>
+            </div>
+    </div>
+    <br/>
+    <div class='container-fluid p-3'>
+        <div class='col-sm-12'>
+          <button onclick='demo()' class='btn btn-success' style='float:left'>Demo</button>
+            <p id='pd' >
+                <p class='time' style='font-size:2.4em;border:2px solid lavender;padding:13px;text-align:center;background-color:#f0f8ff;float:right;'></p>
+            </p>
+
+        </div>
+    </div>
+<body>
+    <script>
+    window.onload=gtime;
+    $(document).ready(function(){
+    $("#flip").click(function(){
+      $("#panel").slideToggle(1000);
+    })
+    $("#flip1").click(function(){
+      $("#panel1").slideToggle(1000);
+    })
+    ;});
+
+        const b=document.querySelector('button');
+        const txt=document.querySelector('.tx')
+        const gp=document.querySelector('.n')
+        let bc=0;let pwin=0;let uwin=0
+        let v=document.querySelector('.i');
+        const o=document.querySelector('.op');
+        const prog=document.querySelector('.pro');
+        const prog1=document.querySelector('.pro1');
+        function count(){bc=bc+1;}
+        function gtime(){
+            var time=new Date();
+            const live=document.querySelector('.time');
+            live.innerHTML='Time   '+checkTime(time.getHours())+":"+checkTime(time.getMinutes())+":"+checkTime(time.getSeconds());
+            var t=setTimeout(gtime,500);
+        }
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i}; 
+            return i;
+        }
+        function end(){
+            if(bc>=5){
+                if(pwin<uwin){
+                  if(window.confirm('Congrat\'s! \nclick ok to continue')){
+                      window.open('https://api.whatsapp.com/send?phone=919989122809&amp&text=Hi, send your Dogecoin wallet address With screen shot of your winning statu');
+                  }
+                }
+                else{
+                  alert("Sorry!\n Better luck next time\nYour win's status is less than computer's win status");
+                }
+            }
+            else{
+              alert("Sorry!\n Number of games played is less than 5");
+            }
+            bc=0;uwin=0;pwin=0;
+        }
+        function demo(){
+          if(window.confirm('This is a demo for player win\nCongrat\'s! \nclick ok to continue')){
+              window.open('https://api.whatsapp.com/send?phone=919989122809&amp&text=Hi, send your Dogecoin wallet address With screen shot of your winning status');
+              }
+        }
+        b.addEventListener('click',submit);
+        function submit(e){
+            let hasNumber= s => /\d/.test(s)
+            if(Number.isInteger(v.value)){v=parseInt(v)}
+            else{o.innerHTML='Invalid Number'}
+            if(hasNumber(txt.value)){o.style.color='red';o.innerHTML='AlphaNumerics can\'t be treated as Name'}
+            else{
+            if(txt.value=='Enter your name'){o.style.color='red';o.innerHTML='Please enter a valid name'}else{
+            if(v.value>0 && v.value<11){
+                o.style.color='blue';
+            const pv=Math.floor(Math.random()*10)+1;
+            if(v.value==pv){
+                o.style.color='rgb(135,255,135)';
+                uwin=1
+                o.innerHTML=txt.value+ ' selected '+v.value+' computer assume '+pv+' so '+ txt.value+' win ';
+                prog.value=(uwin/bc)*100;
+            }else{
+                o.style.color='red';
+                pwin+=1
+                o.innerHTML=txt.value+' selected '+v.value+' computer assume '+pv+' so COMPUTER win<br/> Total games played '+bc;
+                prog1.value=(pwin/bc)*100;
+            }
+        }else{
+            o.style.color='red';
+        o.innerHTML='Please enter a number from 1 to 10'}
+    }
+}
+
+}
+    </script>
+<html>
